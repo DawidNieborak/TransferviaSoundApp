@@ -12,11 +12,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+//    var
+    QString fileContent;
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_getListBtn_clicked();
 
