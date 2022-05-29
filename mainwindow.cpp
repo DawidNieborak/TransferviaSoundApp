@@ -8,6 +8,9 @@
 #include <QFileDialog>
 #include <QTextStream>
 
+#include <nlohmann/json.hpp>
+#include <string.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -25,46 +28,34 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_getListBtn_clicked()
 {
-    cpr::Response r = cpr::Get(cpr::Url{"http://www.httpbin.org/get"},
-                          cpr::Parameters{{"filename", "true"}});
-        r.status_code;                  // 200
-        r.header["content-type"];       // application/json; charset=utf-8
-        r.text;                         // JSON text string
+    cpr::Response r = cpr::Get(cpr::Url{"https://zaliczeniebackend.azurewebsites.net/api/files"});
 
-//        Json j = Json::parse(r.text);
-//        string xx = j["filename"];
-//        std::cout << xx << std::endl;
+
+    using json = nlohmann::json;
+    std::cout << r.text << std::endl;
 }
 
 
 void MainWindow::on_openFileBtn_clicked()
 {
-//    QString fileContent;
-
     QString filename= QFileDialog::getOpenFileName(this, "Choose File");
 
 
    if(filename.isEmpty())
        return;
 
-   QFile file(filename);
 
-   if (!file.open(QIODevice::ReadWrite | QIODevice::Text))
-       return;
-
-   QTextStream in(&file);
-
-   this->fileContent= in.readAll();
-
-   file.close();
+   QFileInfo file(filename);
+   this->filePath = file.absoluteFilePath();
 }
 
 
 void MainWindow::on_postFileBtn_clicked()
 {
-    cpr::Response r = cpr::Post(cpr::Url{"https://localhost:5001/api/files"},
-                       cpr::Multipart{{"files", cpr::File{"~/Desktop/Screenshot 2021-04-30 at 12.48.33.png"}},
-                                      {"files", cpr::File{"~/Desktop/Screenshot 2021-04-30 at 12.48.33.png"}}});
+
+    cpr::Response r = cpr::Post(cpr::Url{"https://zaliczeniebackend.azurewebsites.net/api/files"},
+                       cpr::Multipart{{"files", cpr::File{this->filePath.toStdString()}}});
+
     std::cout << r.status_code << std::endl;
     std::cout << r.text << std::endl;
 }

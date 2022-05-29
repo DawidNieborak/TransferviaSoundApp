@@ -13,7 +13,7 @@ class MainWindow : public QMainWindow
 
 public:
 //    var
-    QString fileContent;
+    QString filePath;
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

@@ -1,2 +1,2 @@
 install
-cpr
+nlohmann-json
