@@ -18,10 +18,12 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         ASCIIBreaker.cpp
+        Tone.cpp
         Decode.cpp
         wav.cpp
         mainwindow.h
         wav.h
+        Tone.h
         ASCIIBreaker.h
         Decode.h
         mainwindow.ui

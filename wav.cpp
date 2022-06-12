@@ -1,6 +1,6 @@
 #include "wav.h"
 
-
+#include "tone.h"
 
 wav::wav()
 {    }
@@ -41,20 +41,19 @@ void static wavFileCreate() {
         const unsigned short n_frequencies = 8;
         const unsigned short n_seconds_each = 1;
         float frequencies[n_frequencies] = { 55.0, 110.0, 220.0, 440.0, 880.0, 1760.0, 3520.0, 7040.0 };
-
+    std::vector<int> frequency{1024, 1536, 2048, 2560, 3072, 3584, 4096, 4608, 5120, 5632};
 
         int start_audio = wave.tellp();
 
 //        for (unsigned short i = 0; i < n_frequencies; ++i) {
-            for(int i = 0; i < wavProperies.get_sample_rate() * wavProperies.get_duration(); i++){
-                double amplitude = (double)i / wavProperies.get_sample_rate() * wavProperies.get_max_amplitude();
-                double value = sin((2 * 3.14 * i * wavProperies.get_frequency()) / wavProperies.get_sample_rate());
+//            for(int i = 0; i < wavProperies.get_sample_rate() * wavProperies.get_duration(); i++){
+//                double amplitude = (double)i / wavProperies.get_sample_rate() * wavProperies.get_max_amplitude();
+//                double value = sin((2 * 3.14 * i * wavProperies.get_frequency()) / wavProperies.get_sample_rate());
 
-                double channel = amplitude * value;
-                // 2 or 4?
-                write_as_bytes(wave, channel, 4);
-            }
-
+//                double channel = amplitude * value;
+//                // 2 or 4?
+//                write_as_bytes(wave, channel, 4);
+//            }
 //        }
 
 

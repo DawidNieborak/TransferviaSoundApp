@@ -14,7 +14,7 @@ private:
 
 
 public:
-    Decode();
+    Decode(double frequency);
 
     char convertFrequencyToArray();
 

@@ -1,8 +1,8 @@
 #include "decode.h"
 
-Decode::Decode()
+Decode::Decode(double frequency)
 {
-
+    this->frequency = frequency;
 }
 
 char Decode::convertFrequencyToArray() {

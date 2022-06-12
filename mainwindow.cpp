@@ -12,7 +12,9 @@
 #include <nlohmann/json.hpp>
 #include <string.h>
 
+
 #include "wav.h"
+#include "Decode.h"
 #include "ASCIIBreaker.h"
 #include <time.h>
 
@@ -38,9 +40,6 @@ void MainWindow::on_getListBtn_clicked()
 
     nlohmann::json jsonData = nlohmann::json::parse(r.text);
     std::cout << r.text << std::endl;
-
-    // Tests
-
 
     if(r.status_code == 200) {
         ui->lineEdit->setText("[SUCCESS]    Wczytano");
@@ -100,14 +99,28 @@ void MainWindow::on_postFileBtn_clicked()
 
 void MainWindow::on_testWAV_clicked()
 {
+    // Wav
 //    wav wav;
 //    wav.wavFileCreate();
 
+    // tests
 
-    setASCIIValue(123456789);
-    ASCIIToFrequency();
+    // Decode
+//    Decode decode(3000);
 
+//    auto quickTest = decode.convertFrequencyToArray();
+//    std::cout << quickTest << std::endl;
 
-    std::cout << "hej" << std::endl;
+    // ASCII Breaker
+    ASCIIBreaker asciiBreaker(123458112);
+    auto freq = asciiBreaker.ASCIIToFrequency();
+
+    for(int i = 0; i < freq.size(); i ++) {
+        auto item = asciiBreaker.frequencyToNumber(freq[i]);
+
+        std::cout << "TUTAJ: " << item << std::endl;
+    }
+
+    std::cout << "----" << std::endl;
 }
 
