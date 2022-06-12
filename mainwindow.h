@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTextEdit>
+#include <QLineEdit>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +16,8 @@ class MainWindow : public QMainWindow
 public:
 //    var
     QString filePath;
+    QString fileName;
+    QLineEdit *logMessage = new QLineEdit();
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -25,6 +29,8 @@ private slots:
     void on_openFileBtn_clicked();
 
     void on_postFileBtn_clicked();
+
+    void on_testWAV_clicked();
 
 private:
     Ui::MainWindow *ui;
